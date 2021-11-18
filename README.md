@@ -218,4 +218,4 @@ python manage.py createsuperuser
 
 開発者サーバで管理サイトにアクセスしてデータを作成し、`127.0.0.1:8000/idea`にアクセスすると、簡単ではあるがAPIを実装できる。(以下の画像を参照)
 
-![2021-11-18.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de77195e-7bd8-4139-9989-4e2a80f959e7/2021-11-18.png)
+![2021-11-18](https://user-images.githubusercontent.com/82911032/142358068-aebba5e4-ac24-41ea-89b7-f46bc301dc1e.png)
