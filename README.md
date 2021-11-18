@@ -81,20 +81,10 @@ Vueで通知機能を実装する時に利用されるnpmライブラリ。
 アイデアに入れる内容は以下の通り。
 
 > * 投稿者名
-<br>
-<br>
 * タイトル
-<br>
-<br>
 * アイデア内容
-<br>
-<br>
 * 投稿日時
-<br>
-<br>
 * いいね数
-<br>
-<br>
 * 発見
  
 
@@ -111,7 +101,7 @@ class IdeaModel(models.Model):
     good = models.IntegerField(null=True, blank=True, default=0)
     interest = models.IntegerField(null=True, blank=True, default=0)
 		
-		#管理サイトに表示させるため
+    #管理サイトに表示させるため
     def __str__(self):
         return self.title
 ```
