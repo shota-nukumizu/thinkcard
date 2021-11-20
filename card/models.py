@@ -10,3 +10,11 @@ class IdeaModel(models.Model):
 
     def __str__(self):
         return self.title
+
+class CommentModel(models.Model):
+    text = models.TextField()
+    post = models.ForeignKey(IdeaModel, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text[:10]
