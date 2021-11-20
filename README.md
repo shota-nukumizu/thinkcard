@@ -214,3 +214,90 @@ python manage.py createsuperuser
 開発者サーバで管理サイトにアクセスしてデータを作成し、`127.0.0.1:8000/idea`にアクセスすると、簡単ではあるがAPIを実装できる。(以下の画像を参照)
 
 ![2021-11-18](https://user-images.githubusercontent.com/82911032/142358068-aebba5e4-ac24-41ea-89b7-f46bc301dc1e.png)
+
+# 返信機能の追加
+
+## シリアライザの設定
+
+まずは`card/api/serializers.py`にアクセスして以下のコードを追加する。(コメントモデルの構築のため)
+
+```python
+class CommentModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentModel
+        fields = '__all__'
+```
+
+ファイルの全体像は以下の通り。
+
+```python
+from rest_framework import serializers
+from card.models import CommentModel, IdeaModel
+
+class IdeaModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IdeaModel
+        fields = '__all__'
+
+class CommentModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentModel
+        fields = '__all__'
+```
+
+## コメントモデルの設定
+
+`card/models.py`にアクセスして、以下のコードを追加する。
+
+```python
+class CommentModel(models.Model):
+    text = models.TextField()
+    post = models.ForeignKey(IdeaModel, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+    #コメントの先頭を10字まで表示する
+    def __str__(self):
+        return self.text[:10]
+```
+
+ファイルの全体像は以下の通り。
+
+```python
+from django.db import models
+
+class IdeaModel(models.Model):
+    name = models.CharField(max_length=30)
+    title = models.CharField(max_length=70)
+    content = models.TextField()
+    post_data = models.DateField(auto_now=True)
+    good = models.IntegerField(null=True, blank=True, default=0)
+    interest = models.IntegerField(null=True, blank=True, default=0)
+
+    def __str__(self):
+        return self.title
+
+class CommentModel(models.Model):
+    text = models.TextField()
+    post = models.ForeignKey(IdeaModel, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text[:10]
+```
+
+あとはコマンドプロンプトで以下のコマンドを入力すれば、コメントモデルが完成する。
+
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
+
+# 将来の展望
+
+これからは、以下の機能をアプリに追加していきたい。
+
+- ログイン機能(Vue上)　←これは後回し
+- 投稿したアイデアを一覧上に並べる機能　←最優先
+- 自分の投稿に限り、投稿したアイデアを削除したり編集したりする機能
+
+これらをAPIやVueで実装できるかどうかが正直怪しいところである。
