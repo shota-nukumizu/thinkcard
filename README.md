@@ -292,6 +292,40 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+# Font Awesomeの追加
+
+以下のコードを`vue-site/public/index.html`に挿入するだけで機能。
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+```
+
+ファイルの全体像は以下の通り。
+
+```html
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
+```
+
+これでクラス設定だけでCSSを指定できるようになる。(ということはわざわざTailwind CSSで指定しなくても十分に高いクオリティのアプリが作れる、ということになる)
+
 # 将来の展望
 
 これからは、以下の機能をアプリに追加していきたい。
