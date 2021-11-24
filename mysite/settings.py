@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gyf0c)ig5&c=s!&6#e(=+^^37q5$d&!8ue_-_3rx!u26bw4w6j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8080']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'djoser',
     'card',
 ]
 
