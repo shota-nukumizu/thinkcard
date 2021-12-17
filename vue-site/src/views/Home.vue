@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-    {{ info }}
+  <h1>Index Page</h1>
+  <div class="home" v-for="item in info" v-bind:key="item.id">
+    {{ item.title }}
   </div>
 </template>
 
@@ -12,13 +13,13 @@ export default {
   name: 'Home',
   data() {
     return {
-      info: []
+      info: {}
     }
   },
   mounted() {
     axios
       .get('/idea/')
-      .then(response => (this.info = response))
+      .then(response => (this.info = response.data))
   }
 }
 </script>
